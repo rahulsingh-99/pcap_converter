@@ -236,4 +236,4 @@ def logout():
 
 if __name__ == '__main__':
     init_db()  # Initialize the database
-    app.run(debug=True)
+    app.run(debug=False)
