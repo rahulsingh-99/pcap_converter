@@ -51,8 +51,6 @@ def process_pcap_files(pcap_file, output_dir, chunk_size=50, max_packets=500):
     # Limit packets for processing
     limited_packets = list(islice(capture, max_packets))
 
-    # Start timing the processing
-    # start_time = time.time()
 
     # Process packets in chunks
     packet_chunks = chunked(limited_packets, chunk_size)
@@ -61,8 +59,7 @@ def process_pcap_files(pcap_file, output_dir, chunk_size=50, max_packets=500):
     with Pool(cpu_count()) as pool:
         pool.map(process_packet_chunk, chunk_info_list)
 
-    # end_time = time.time()
-    # print(f"Completed processing packets in {end_time - start_time:.2f} seconds.")
+
 
 # Main code
 if __name__ == "__main__":
@@ -71,11 +68,6 @@ if __name__ == "__main__":
     pcap_file = os.path.join(script_dir, 'uploads', 'transmitter_uplane_dl_only_5g_nr2_1cc_400MHz_TM1p1_10ms_4pcap.pcap')
     output_dir = os.path.join(script_dir, 'output')
 
-    # print("Starting the PCAP processing...")
-    total_start_time = time.time()
 
     # Set chunk size and max packets to meet the 30-second constraint
     process_pcap_files(pcap_file, output_dir, chunk_size=100, max_packets=1000)
-
-    total_end_time = time.time()
-    print(f"Total script execution time: {total_end_time - total_start_time:.2f} seconds.")
