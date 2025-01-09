@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <h1>Welcome, {{ username }}</h1>
+
+    <!-- Form for Uploading Initial PCAP File -->
+    <h2>Upload PCAP File</h2>
+    <form action="/dashboard" method="post" enctype="multipart/form-data">
+      <input type="file" name="file" accept=".pcap" required />
+      <button type="submit">Upload PCAP</button>
+    </form>
+
+    <!-- Conditionally render the second form after first upload -->
+    {% if pcap_uploaded %}
+    <h2>Upload PCAP File Again for CSV Processing</h2>
+    <form action="/upload_csv" method="post" enctype="multipart/form-data">
+      <input type="file" name="file" accept=".pcap" required />
+      <button type="submit">Upload and Process to CSV</button>
+    </form>
+    {% endif %}
+
+    <h3>File Merging</h3>
+    <form action="/concatenate_files" method="post">
+      <p>Click the button below to merge the .xlsx and .csv files.</p>
+      <button type="submit">Merge .xlsx and .csv Files</button>
+    </form>
+
+    <h3>Download Files</h3>
+    <a href="/download/merged_output.csv" class="button"
+      >Download Final Processed File</a
+    >
+    <a href="/logout">Logout</a>
+  </body>
+</html>
