@@ -246,4 +246,6 @@ async def process_file(filename):
         return f"An error occurred while processing the file: {e}"
 
 if __name__ == '__main__':
-    app.run(debug=True,threaded=True)
+    app.run(debug=True,threaded=True)    
+    port = int(os.environ.get("PORT", 5000))  # Default to 5000 if PORT is not set
+    app.run(host="0.0.0.0", port=port)
