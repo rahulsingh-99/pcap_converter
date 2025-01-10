@@ -1,7 +1,6 @@
 import pyshark
 import os
 import nest_asyncio
-import time
 from multiprocessing import Pool, cpu_count
 from itertools import islice
 
